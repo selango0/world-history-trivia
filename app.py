@@ -7,21 +7,23 @@ from datetime import datetime
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{user}:{password}@{host}/{database}"
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:b61a657a49bded402e7b973876160162a77aa8ce004557a926dbc12778209d84@localhost/d4kpadureecp54"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://xcanljhkiccuni:b61a657a49bded402e7b973876160162a77aa8ce004557a926dbc12778209d84@ec2-107-22-122-106.compute-1.amazonaws.com:5432/d4kpadureecp54"
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:b61a657a49bded402e7b973876160162a77aa8ce004557a926dbc12778209d84@localhost/d4kpadureecp54"
 db = SQLAlchemy(app)
+
+
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.String(100), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __repr__(self):
-        return f"Event: {self.description}"
+        return f"Event: {self.first_name} {self.last_name}"
 
     def __init__(self, description, first_name, last_name):
-        self.description = description
         self.first_name = first_name
         self.last_name = last_name
 
